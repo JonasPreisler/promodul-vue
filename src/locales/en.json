@@ -1,0 +1,309 @@
+{
+
+  "menuitems": {
+    "menu": {
+      "text": "Menu"
+    },
+  
+    "resourcesettings": {
+      "text": "Ressurser Innstillinger"
+    },
+    "settings": {
+      "text": "Innstillinger"
+    },
+    "owner_dashboard": {
+      "text": "Dashboard"
+    },
+    "owner_companies": {
+      "text": "Companies"
+    },
+    "user": {
+      "text": "User"
+    },
+    "scheduler": {
+      "text": "Planlegger"
+    },
+    "dashboard": {
+      "text": "Dashboard"
+    },
+    "employee": {
+      "text": "Ansatte"
+    },
+    "company": {
+      "text": "Firma"
+    },
+    "manageEmployees": {
+      "text": "Adminstrere ansatte"
+    },
+    "resources": {
+      "text": "Ressurser"
+    },
+    "dashboards": {
+      "text": "Dashboards",
+      "badge": "04",
+      "list": {
+        "default": "Default",
+        "saas": "Saas",
+        "crypto": "Crypto",
+        "blog": "Blog"
+      }
+    },
+    "layouts": {
+      "text": "Layouts",
+      "list": {
+        "horizontal": "Horizontal",
+        "lightsidebar": "Light Sidebar",
+        "compactsidebar": "Compact Sidebar",
+        "iconsidebar": "Icons Sidebar",
+        "boxed": "Boxed Layout",
+        "coloredsidebar": "Colored Sidebar",
+        "vertical": "Vertical",
+        "lighttopbar": "Light Topbar",
+        "coloredheader": "Colored Header"
+      }
+    },
+    "apps": {
+      "text": "Apps"
+    },
+    "calendar": {
+      "text": "Kalender"
+    },
+    "chat": {
+      "text": "Chat",
+      "badge": "New"
+    },
+    "filemanager": {
+      "text": "Filer",
+      "badge": "New"
+    },
+    "ecommerce": {
+      "text": "Ecommerce",
+      "list": {
+        "products": "Products",
+        "productdetail": "Product Detail",
+        "orders": "Orders",
+        "customers": "Customers",
+        "cart": "Cart",
+        "checkout": "Checkout",
+        "shops": "Shops",
+        "addproduct": "Add Product"
+      }
+    },
+    "projects": {
+      "text": "Prosjekt",
+      "list": {
+        "grid": "Projects Grid",
+        "projectlist": "Projects List",
+        "overview": "Project Overview",
+        "create": "Create New"
+      }
+    },
+    "tasks": {
+      "text": "Oppgaver",
+      "list": {
+        "tasklist": "Task List",
+        "kanban": "Kanban Board",
+        "createtask": "Create Task"
+      }
+    }
+   
+  },
+  "common":{
+    "name": "Navn",
+    "Name": "Navn",
+    "add": "Legg til",
+    "Edit":"Rediger",
+    "description":"Beskrivelse",
+    "model":"Modell",
+    "comment":"Kommentar",
+    "type":"type",
+    "Are you sure to delete this resource?":"Er du sikker på at du vil slette denne ressursen?",
+    "Yes, delete it!":"Ja, slett den!",
+    "Cancel":"Avbryt",
+    "Employees":"Ansatte",
+    "Resources":"Ressurser",
+    "Projects":"Prosjekter" ,
+    "Project": "Prosjekt",
+    "Task": "Oppgave",
+    "project": "Prosjekt",
+    "task": "Oppgave",
+    "Back":"Tilbake",
+    "Files":"Filer",
+    "File name": "Filnavn",
+    "Search": "Søk...",
+    "Edit Company": "Rediger firma",
+    "Address": "Adresse",
+    "Phone": "Telefon",
+    "Logo": "Logo",
+    "Description": "Beskrivelse",
+    "Save": "Lagre",
+    "Please add resource manufacturers into the system":"Legg til kun ressursmerker og typer i systemet.",
+    "You can search for resource manufacturers in resources menu item and add the model or resourcetype there":"Du kan søke etter ressursmerker og typer under ressurser i menyen eller legge til ny ressursmodell eller ressurstype der.",
+    "Machine manufacturer" : "Maskinmerke",
+    "Tool manufacturer" : "Verktøymerke",
+    "External source types":"Eksterne ressurstyper",
+    "Are you sure delete selected machine model?":"ER du sikker på at du vil slette dette maskin merket?",
+    "Are you sure delete selected tool model?":"Er du sikker på at du vil slette dette verktøymerket?",
+    "Are you sure delete selected external source type?":"Er du sikker på du vil slette denne eksterne ressurstypen?",
+    "Project Manager": "Prosjektleder",
+    "Choose simply, whom to be a project manager, drag and drop":"Velg enkelt hvem som skal være prosjektleder, dra og slipp.",
+    "Scheduled": "Planlagt",
+    "Current" :"Nåværende",
+    "Finished" : "Utførte",
+    "Tasks" : "Oppgaver",
+    "Open" : "Åpen",
+    "open" : "Åpen",
+    "In progress" : "Påbegynt",
+    "In Progress" : "Påbegynt",
+    "Done" : "Utført",
+    "done" : "Utført",
+    "Reactivated":"Reaktivert",
+    "Reactivate":"Reaktiver",
+    "Change status":"Bytt status",
+    "External" : "Eksterne",
+    "Machine" : "Maskiner",
+    "Tool" : "Verktøy",
+    "Employee" : "Ansatt",
+    "employee" : "Ansatt",
+    "employ" : "Ansatt",
+    "manager": "Leder",
+    "Project manager": "Prosjektleder",
+    "Total" : "Totalt",
+    "Upcoming Tasks": "Kommende oppgaver",
+    "In progress tasks":  "Påbegynte oppgaver",
+    "Done task": "Utførte oppgaver",
+    "View project": "Se prosjekt",
+    "View Project": "Se prosjekt",
+    "View task": "Se oppgaven",
+    "Upcoming":"Kommende",
+    "Contact person": "Kontaktperson",
+    "Start date": "Startdato",
+    "End date" : "Sluttdato",
+    "Title":"Tittel",
+    "Notifications": "Varsler",
+    "Logout": "Logg ut",
+    "Deadline": "Frist",
+    "Username": "Brukernavn",
+    "Email": "E-post",
+    "Add file": "Legg til fil",
+    "Expiration date":"Utløpsdato",
+    "Document":"Dokument",
+    "All data related to the user will be deleted":"All data relatert til brukeren blir slettet.",
+    "Delete user?":"Vil du slette brukeren?",
+    "Password": "Passord",
+    "Project id": "Prosjekt Id",
+    "All the tasks and documents related to the project will be deleted":"Alle oppgaver og dokumenter som er relatert til prosjektet blir slettet.",
+    "Delete project": "Vil du slette prosjektet?",
+    "Project description":"Prosjektbeskrivelse",
+    "Post number": "Postnummer",
+    "Team members": "Prosjektteam",
+    "Task list":"Oppgaveliste",
+    "Add new task": "Legg til ny oppgave",
+    "Attached files": "Vedlagte filer",
+    "Edit task" : "Rediger oppgave",
+    "Task title" : "Oppgavetittel",
+    "Add employee": "Legg til ansatte",
+    "Add tool": "Legg til verktøy",
+    "Add-machine" : "Legg til maskin",
+    "Add machine" : "Legg til maskin",
+    "Add external resource"  :"Legg til ekstern ressurs",
+    "Add external resources"  :"Legg til ekstern ressurs",
+    "Add resources":"Legg til ressurser",
+    "Task description" : "Oppgavebeskrivelse",
+    "Select option" : "Velg",
+    "Send":"Sende",
+    "Yes":"Ja",
+
+   "Repeat password":"Gjenta passordet",
+    "Add contact pesron":"Legg til kontaktperson",
+    "Not an available resource for this dates":"Er ikke en tilgjengelig ressurs for denne datoen",
+    "Avialable dates":"Tilgjengelige datoer",
+    "Add post number":"Legg til postnummer",
+    "Company name":"Firmanavn",
+    "Legal entity":"Lovlig enhet",
+    "Create new company":"Opprett nytt firma",
+    "New company":"Nytt firma",
+    "Company Id":"Firma ID",
+    "Company manager":"Firmaleder",
+    "All the tasks and documents related to the Company will be deleted":"Alle oppgaver og dokumenter som er relatert til firmaet vil bli slettet.",
+    "Delete company?":"Slette firma?",
+    "The Company is deleted successfully":"Fullført!! Firmaet ble slettet.",
+    "Deleted":"Slettet!",
+    "Task has been deleted":"Oppgaven har blitt slettet.",
+    "The task deleted successfully":"Fullført!! Oppgaven ble slettet.",
+    "Welcome":"Velkommen!",
+    "Email is required":"E-post er påkrevd!",
+    "Please enter valid email":"Skriv inn gyldig E-post!",
+    "Enter password":"Skriv inn passord",
+    "Password is required":"Passord er påkrevd!",
+    "Log In":"LOGG INN",
+    "Project has been saved":"Prosjektet er lagret.",
+    "Are you sure":"Er du sikker?",
+    "You won't be able to delete this":" Du får ikke mulighet til å slette dette!",
+    "Event has been deleted":"Hendelsen har blitt slettet.",
+    "Create new project":"Opprett nytt prosjekt",
+    "Project name":"Prosjektnavn",
+    "Edit company":"Rediger firma",
+    "Company": "Firma",
+    "Enter name":"Skriv inn navn",
+    "Settings":"Innstillinger",
+    "Employee added successfully":" Fullført!! Ansatte har blitt lagt til",
+    "Warning":"Advarsel!",
+    "Data not exists":"Data eksisterer ikke",
+    "File uploaded successfully":"Fullført!! Filen er lastet opp",
+    "File upload":"Filopplasting",
+    "Something went wrong":"Noe gikk galt",
+    "The employee deleted successfully":"Fullført!! Den ansatte er slettet.",
+    "Register user":"Registrer bruker",
+    "First name":"Fornavn",
+    "Last name":"Etternavn",
+    "File manager":"Filarkiv",
+    "Mail sent successfully":"Fullført!! Mailen ble sendt.",
+    "Something went wrong, try latter":"Noe gikk galt, prøv senere.",
+    "Owner companies":"Firmaeiere",
+    "Users":"Brukere",
+    "The Company registered successfully":"Fullført!! Firmaet er blitt registrert.",
+    "All data related to the comany will be deleted":"Alle data som er relatert til firmaet blir slettet.",
+    "The company deleted successfully":"Fullført!! Firmaet er slettet",
+    "Activete company":"Aktiver firma",
+    "Dectivete company":"Deaktiver firma",
+    "The Company  activated successfully":"Fullført!! Firmaet er blitt aktivert.",
+    "The Company  deactivated successfully":"Fullført!! Firmaet er blitt deaktivert",
+    "Companies":"Firmaer",
+    "Admin":"Admin",
+    "New project":"Nytt prosjekt",
+    "Status changed successfully":"Fullført!!Status er endret.",
+    "The project is deleted successfully":"Fullført!! Prosjektet ble slettet.",
+    "The project added successfully":"Fullført!! Prosjektet ble lagt til.",
+    "The project updated successfully":"Fullført!! Prosjektet ble oppdatert.",
+    "Not an available employee for this dates":"Ingen ansatte er tilgjengelige for disse datoene.",
+    "Not an available machine for this dates":"Det er ingen tilgjengelig maskin for disse datoene.",
+    "Not an available tool for this dates":"Det er ingen verktøy tilgjengelig for disse datoene.",
+    "Edit project":"Rediger prosjekt",
+    "Are you sure delete task":"Er du sikker på at du vil slette oppgaven",
+    "The task added successfully":"Fullført!! Oppgaven ble slettet",
+    "The task updated successfully":"Fullført!! Oppgaven ble oppdatert",
+    "The file uploaded successfully":"Fullført!! Filen ble lastet opp",
+    "Enter title":"Skriv inn tittel",
+    "Completed":"Komplett",
+    "Resgister user":"Registrer bruker",
+    "Resource deleted successfully":"Fullført!! Ressursen ble slettet",
+    "Select type":"Velg type",
+    "Select model":"Velg modell",
+    "Enter description":"Skriv inn beskrivelse",
+    "Add machine models":"Legg til maskinmerke",
+    "Add external source types":"Legg til eksterne ressurstyper",
+    "Add tool model":"Legg til verktøymerke",
+    "Operation completed successfully":"Fullført! Operasjonen er komplett",
+    "Add task":"Legg til oppgave"    
+
+
+
+
+
+
+
+
+
+  }
+}

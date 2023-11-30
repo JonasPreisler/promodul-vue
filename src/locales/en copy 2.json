@@ -1,0 +1,306 @@
+{
+
+  "menuitems": {
+    "menu": {
+      "text": "Menu"
+    },
+  
+    "resourcesettings": {
+      "text": "Ressurser Innstillinger"
+    },
+    "settings": {
+      "text": "Innstillinger"
+    },
+    "owner_dashboard": {
+      "text": "Dashboard"
+    },
+    "owner_companies": {
+      "text": "Companies"
+    },
+    "user": {
+      "text": "User"
+    },
+    "scheduler": {
+      "text": "Planlegger"
+    },
+    "dashboard": {
+      "text": "Dashboard"
+    },
+    "employee": {
+      "text": "Ansatte"
+    },
+    "company": {
+      "text": "Firma"
+    },
+    "manageEmployees": {
+      "text": "Adminstrere ansatte"
+    },
+    "resources": {
+      "text": "Ressurser"
+    },
+    "dashboards": {
+      "text": "Dashboards",
+      "badge": "04",
+      "list": {
+        "default": "Default",
+        "saas": "Saas",
+        "crypto": "Crypto",
+        "blog": "Blog"
+      }
+    },
+    "layouts": {
+      "text": "Layouts",
+      "list": {
+        "horizontal": "Horizontal",
+        "lightsidebar": "Light Sidebar",
+        "compactsidebar": "Compact Sidebar",
+        "iconsidebar": "Icons Sidebar",
+        "boxed": "Boxed Layout",
+        "coloredsidebar": "Colored Sidebar",
+        "vertical": "Vertical",
+        "lighttopbar": "Light Topbar",
+        "coloredheader": "Colored Header"
+      }
+    },
+    "apps": {
+      "text": "Apps"
+    },
+    "calendar": {
+      "text": "Kalender"
+    },
+    "chat": {
+      "text": "Chat",
+      "badge": "New"
+    },
+    "filemanager": {
+      "text": "Filer",
+      "badge": "New"
+    },
+    "ecommerce": {
+      "text": "Ecommerce",
+      "list": {
+        "products": "Products",
+        "productdetail": "Product Detail",
+        "orders": "Orders",
+        "customers": "Customers",
+        "cart": "Cart",
+        "checkout": "Checkout",
+        "shops": "Shops",
+        "addproduct": "Add Product"
+      }
+    },
+    "projects": {
+      "text": "Prosjekt",
+      "list": {
+        "grid": "Projects Grid",
+        "projectlist": "Projects List",
+        "overview": "Project Overview",
+        "create": "Create New"
+      }
+    },
+    "tasks": {
+      "text": "Oppgaver",
+      "list": {
+        "tasklist": "Task List",
+        "kanban": "Kanban Board",
+        "createtask": "Create Task"
+      }
+    }
+   
+  },
+  "common":{
+    "name": "Navn",
+    "Name": "Navn",
+    "add": "Legg til",
+    "Edit":"Rediger",
+    "description":"Beskrivelse",
+    "model":"Modell",
+    "comment":"Kommentar",
+    "type":"type",
+    "Are you sure to delete this resource?":"Er du sikker på at du vil slette denne ressursen?",
+    "Yes, delete it!":"Ja, slett den!",
+    "Cancel":"Avbryt",
+    "Employees":"Ansatte",
+    "Resources":"Ressurser",
+    "Projects":"Prosjekter" ,
+    "Project": "Prosjekt",
+    "Task": "Oppgave",
+    "project": "Prosjekt",
+    "task": "Oppgave",
+    "Back":"Tilbake",
+    "Files":"Filer",
+    "File name": "Filnavn",
+    "Search": "Søk...",
+    "Edit Company": "Rediger firma",
+    "Address": "Adresse",
+    "Phone": "Telefon",
+    "Logo": "Logo",
+    "Description": "Beskrivelse",
+    "Save": "Lagre",
+    "Please add resource manufacturers into the system":"Legg til kun ressursmerker og typer i systemet.",
+    "You can search for resource manufacturers in resources menu item and add the model or resourcetype there":"Du kan søke etter ressursmerker og typer under ressurser i menyen eller legge til ny ressursmodell eller ressurstype der.",
+    "Machine manufacturer" : "Maskinmerke",
+    "Tool manufacturer" : "Verktøymerke",
+    "External source types":"Eksterne ressurstyper",
+    "Are you sure delete selected machine model?":"ER du sikker på at du vil slette dette maskin merket?",
+    "Are you sure delete selected tool model?":"Er du sikker på at du vil slette dette verktøymerket?",
+    "Are you sure delete selected external source type?":"Er du sikker på du vil slette denne eksterne ressurstypen?",
+    "Project Manager": "Prosjektleder",
+    "Choose simply, whom to be a project manager, drag and drop":"Velg enkelt hvem som skal være prosjektleder, dra og slipp.",
+    "Scheduled": "Planlagt",
+    "Current" :"Nåværende",
+    "Finished" : "Utførte",
+    "Tasks" : "Oppgaver",
+    "Open" : "Åpen",
+    "open" : "Åpen",
+    "In progress" : "Påbegynt",
+    "In Progress" : "Påbegynt",
+    "Done" : "Utført",
+    "done" : "Utført",
+    "Reactivated":"Reaktivert",
+    "Reactivate":"Reaktiver",
+    "Change status":"Bytt status",
+    "External" : "Eksterne",
+    "Machine" : "Makiner",
+    "Tool" : "Verktøy",
+    "Employee" : "Ansatt",
+    "employee" : "Ansatt",
+    "manager": "Leder",
+    "Project manager": "Prosjektleder",
+    "Total" : "Totalt",
+    "Upcoming Tasks": "Kommende oppgaver",
+    "In progress tasks":  "Påbegynte oppgaver",
+    "Done task": "Utførte oppgaver",
+    "View project": "Se prosjekt",
+    "View Project": "Se prosjekt",
+    "View task": "Se oppgaven",
+    "Upcoming":"kommende",
+    "Contact person": "Kontaktperson",
+    "Start date": "Startdato",
+    "End date" : "Sluttdato",
+    "Title":"Tittel",
+    "Notifications": "Varsler",
+    "Logout": "Logg ut",
+    "Deadline": "Frist",
+    "Username": "Brukernavn",
+    "Email": "E-post",
+    "Add file": "Legg til fil",
+    "Expiration date":"Utløpsdato",
+    "Document":"Dokument",
+    "All data related to the user will be deleted":"All data relatert til brukeren blir slettet.",
+    "Delete user?":"Vil du slette brukeren?",
+    "Password": "Passord",
+    "Project id": "Prosjekt Id",
+    "All the tasks and documents related to the project will be deleted":"Alle oppgaver og dokumenter som er relatert til prosjektet blir slettet.",
+    "Delete project": "Vil du slette prosjektet?",
+    "Project description":"Prosjektbeskrivelse",
+    "Post number": "Postnummer",
+    "Team members": "Prosjektteam",
+    "Task list":"Oppgaveliste",
+    "Add new task": "Legg til ny oppgave",
+    "Attached files": "Vedlagte filer",
+    "Edit task" : "Rediger oppgave",
+    "Task title" : "Oppgavetittel",
+    "Add employee": "Legg til ansatte",
+    "Add tool": "Legg til verktøy",
+    "Add machine" : "Legg til maskin",
+    "Add external resource"  :"Legg til ekstern ressurs",
+    "Add external resources"  :"Legg til ekstern ressurs",
+    "Task description" : "Oppgavebeskrivelse",
+    "Select option" : "Velg",
+    "Send":"Sende",
+    "Yes":"Ja",
+
+
+   "Repeat password":"Repeat password",
+    "Add contact pesron":"Add Contact Pesron",
+    "Not an available resource for this dates":"Not an available resource for this dates",
+    "Avialable dates":"Avialable dates",
+    "Add post number":"Add post number",
+    "Company name":"Company name",
+    "Legal entity":"Legal entity",
+    "Create new company":"Create new company",
+    "New company":"New company",
+    "Company Id":"Company Id",
+    "Company manager":"Company manager",
+    "All the tasks and documents related to the Company will be deleted":"All the tasks and documents related to the Company will be deleted.",
+    "Delete company?":"Delete company?",
+    "The Company is deleted successfully":"The Company is deleted successfully.",
+    "Deleted":"Deleted!",
+    "Task has been deleted":"Task has been deleted.",
+    "The task deleted successfully":"The task deleted successfully",
+    "Welcome":"Welcome!",
+    "Email is required":"E-post er nødvendig!",
+    "Please enter valid email":"Skriv inn gyldig E-post!",
+    "Enter password":"Enter password",
+    "Password is required":"Password is required!",
+    "Log In":"LOGG INN",
+    "Project has been saved":"Project has been saved",
+    "Are you sure":"Are you sure?",
+    "You won't be able to delete this":"You won't be able to delete this!",
+    "Event has been deleted":"Event has been deleted.",
+    "Create new project":"Create new project",
+    "Project name":"Prosjektnavn",
+    "Edit company":"Edit company",
+    "Company": "Firma",
+    "Enter name":"Enter name",
+    "Settings":"Innstillinger",
+    "Employee added successfully":"Employee added successfully",
+    "Warning":"Warning!",
+    "Data not exists":"Data not exists",
+    "File uploaded successfully":"File uploaded successfully",
+    "File upload":"File upload",
+    "Something went wrong":"Something went wrong",
+    "The employee deleted successfully":"The employee deleted successfully.",
+    "Register user":"Register user",
+    "First name":"First name",
+    "Last name":"Last name",
+    "File manager":"File manager",
+    "Mail sent successfully":"Mail sent successfully",
+    "Something went wrong, try latter":"Something went wrong, try latter",
+    "Owner companies":"Owner companies",
+    "Users":"Users",
+    "The Company registered successfully":"The Company registered successfully.",
+    "All data related to the comany will be deleted":"All data related to the comany will be deleted.",
+    "The company deleted successfully":"The company deleted successfully",
+    "Activete company":"Activete company",
+    "Dectivete company":"Dectivete company",
+    "The Company  activated successfully":"The Company  activated successfully.",
+    "The Company  deactivated successfully":"The Company  deactivated successfully",
+    "Companies":"Companies",
+    "Admin":"Admin",
+    "New project":"New project",
+    "Status changed successfully":"Status changed successfully",
+    "The project is deleted successfully":"The project is deleted successfully.",
+    "The project added successfully":"The project added successfully",
+    "The project updated successfully":"The project updated successfully",
+    "Not an available employee for this dates":"Not an available employee for this dates",
+    "Not an available machine for this dates":"Not an available machine for this dates",
+    "Not an available tool for this dates":"Not an available tool for this dates",
+    "Edit project":"Edit project",
+    "Are you sure delete task":"Are you sure delete task",
+    "The task added successfully":"The task added successfully",
+    "The task updated successfully":"The task updated successfully",
+    "The file uploaded successfully":"The file uploaded successfully",
+    "Enter title":"Enter title",
+    "Completed":"Completed",
+    "Resgister user":"Resgister user",
+    "Resource deleted successfully":"Resource deleted successfully",
+    "Select type":"Select type",
+    "Select model":"Select model",
+    "Enter description":"Enter description",
+    "Add machine models":"Add machine models",
+    "Add external source types":"Add external source types",
+    "Add tool model":"Add tool model",
+    "Operation completed successfully":"Operation completed successfully"    
+
+
+
+
+
+
+
+
+
+  }
+}
