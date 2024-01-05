@@ -449,7 +449,7 @@ this.extraModal = true;
                                 <template #cell(file_name)="row" class="text-right">
                                 <a
                                 target="_blank"
-                                  :href="'https://apipromodul.no/en/attachments/file?uuid='+row.item.uuid"
+                                  :href="'http://localhost:3000/en/attachments/file?uuid='+row.item.uuid"
                                   class="text-dark fw-medium"
                                   ><i
                                   class="mdi font-size-18 align-middle text-primary me-2"

@@ -321,7 +321,7 @@ export default {
       },
           download(item,name){
       axios({
-  url: 'https://apipromodul.no/en/attachments/file?uuid='+item, //your url
+  url: 'http://localhost:3000/en/attachments/file?uuid='+item, //your url
   method: 'GET',
   responseType: 'blob', // important
 }).then((response) => {

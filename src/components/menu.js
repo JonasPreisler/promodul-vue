@@ -6,13 +6,13 @@ export const menuItems = [
         link: "/",
         role:  ["Project Manager","Super Admin", "Employee"]
     },
-    {
-        id: 2,
-        label: "menuitems.scheduler.text",
-        icon: "bx-pie-chart-alt-2",
-        link: "/scheduler",
-        role:  ["Project Manager","Super Admin"]
-    },
+    // {
+    //     id: 2,
+    //     label: "menuitems.scheduler.text",
+    //     icon: "bx-pie-chart-alt-2",
+    //     link: "/scheduler",
+    //     role:  ["Project Manager","Super Admin"]
+    // },
     {
         id: 3,
         label: "menuitems.dashboard.text",

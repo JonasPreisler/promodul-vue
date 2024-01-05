@@ -190,10 +190,10 @@ export default {
   methods: {
     download(item,name){
       axios({
-  url: 'https://apipromodul.no/en/attachments/file?uuid='+item, //your url
-  method: 'GET',
-  responseType: 'blob', // important
-}).then((response) => {
+      url: `${process.env.BASE_URL}/en/attachments/file?uuid=`+item, //your url
+      method: 'GET',
+      responseType: 'blob', // important
+    }).then((response) => {
       const blob = new Blob([response.data], { type: response.data.type })
         const link = document.createElement('a')
         link.href = URL.createObjectURL(blob)
@@ -450,6 +450,21 @@ export default {
         
         }
       });
+    },
+    addRow(userId) {
+      const user = this.taskUsersList.find(user => user.id === userId);
+      if (user) {
+        if (!user.additionalRows) {
+          this.$set(user, 'additionalRows', []); // Initialize additionalRows as an array
+        }
+        user.additionalRows.push({}); // Add an empty object or any data you need
+      }
+    },
+    removeRow(userId, rowIndex) {
+      const user = this.taskUsersList.find(user => user.id === userId);
+      if (user && user.additionalRows.length > rowIndex) {
+        user.additionalRows.splice(rowIndex, 1);
+      }
     },
     submitTaskForm() {
          
@@ -1229,6 +1244,36 @@ export default {
           <div class="form-group row">
             <label>{{$t("common.Add employee")}}</label>  
             <div class="col-lg-12">
+
+              <div v-for="user in taskUsersList" :key="user.id" class="row rounded bg-light m-2 p-2 shadow-sm">
+                <div class="col-md-10">
+                  <div>{{ user.first_name }}</div>
+                </div>
+                <div class="col-md-2">
+                  <div @click="addRow(user.id)" class="btn btn-outline-warning btn-sm">+</div>
+                </div>
+
+                <div v-for="(row, index) in user.additionalRows" :key="index" class="col-md-12 my-2">
+                  <div class="row">
+                    <div class="col-md-2">
+                      Dato fra
+                    </div>
+                    <div class="col-md-2">
+                      Dato til
+                    </div>
+                    <div class="col-md-2">
+                      Tid fra
+                    </div>
+                    <div class="col-md-2">
+                      Tid til
+                    </div>
+                    <div class="col-md-2">
+                      <div @click="removeRow(user.id, index)" class="btn btn-outline-danger btn-sm">Remove</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
                   <multiselect 
                             :select-label="'klikk enter for å velge'"
                                 :selected-label="'valgt'"

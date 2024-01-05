@@ -90,13 +90,13 @@ export default {
         this.notificationCount++;
 }
     axios({
-  url: 'https://apipromodul.no/en/company_logos/logo?uuid='+this.$store.state.authfack.user.company_logo, //your url
+  url: 'http://localhost:3000/en/company_logos/logo?uuid='+this.$store.state.authfack.user.company_logo, //your url
   method: 'GET',
   responseType: 'blob', // important
 }).then((response) => {
       // eslint-disable-next-line no-unused-vars
       const blob = new Blob([response.data], { type: response.data.type })
-          this.companyLogo = 'https://apipromodul.no/en/company_logos/logo?uuid='+this.$store.state.authfack.user.company_logo;
+          this.companyLogo = 'http://localhost:3000/en/company_logos/logo?uuid='+this.$store.state.authfack.user.company_logo;
 
         // eslint-disable-next-line no-unused-vars
         } ,error => {

@@ -1407,7 +1407,7 @@ locale: {
     },
     generateRows(){
           ApiService.setHeader();
-      return   axios.get('https://apipromodul.no/en/schedulers/view?type=employee')
+      return   axios.get('http://localhost:3000/en/schedulers/view?type=employee')
       
       },
     updateFirstRow(){

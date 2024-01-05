@@ -24,7 +24,7 @@ export function configureFakeBackend() {
                       ] =  '';
 
                     axios
-                    .post("https://apipromodul.no/en/auth", {
+                    .post("http://localhost:3000/en/auth", {
                       username: params.email,
                       password: params.password,
                     })

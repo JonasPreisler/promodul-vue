@@ -10,7 +10,7 @@ const ApiService = {
   init() {
     Vue.use(VueAxios, axios);
     Vue.axios.defaults.baseURL =
-      "https://apipromodul.no/en/";
+      "http://localhost:3000/en/";
   },
 
   /**

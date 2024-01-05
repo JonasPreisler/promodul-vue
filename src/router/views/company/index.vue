@@ -61,7 +61,7 @@ export default {
         
         ApiService.post("/company_logos", formData).then(response => {
                   // eslint-disable-next-line no-console
-               this.companyLogo = "https://apipromodul.no/en/company_logos/logo/?uuid="+response.data.uuid
+               this.companyLogo = "http://localhost:3000/en/company_logos/logo/?uuid="+response.data.uuid
                 
                   
                
@@ -104,7 +104,7 @@ export default {
         this.cDescription =this.companyForm.description = response.data.company.description
         this.cAddress = this.companyForm.address = response.data.company.address
       
-        this.companyLogo = response.data.company.company_logo ? "https://apipromodul.no/en/company_logos/logo/?uuid="+response.data.company.company_logo.uuid: "@/assets/images/companies/img-1.png"
+        this.companyLogo = response.data.company.company_logo ? "http://localhost:3000/en/company_logos/logo/?uuid="+response.data.company.company_logo.uuid: "@/assets/images/companies/img-1.png"
            // eslint-disable-next-line no-console
       },
       error => {

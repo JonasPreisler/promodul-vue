@@ -97,7 +97,7 @@ export default {
       if (this.$v.mailForm.$invalid) {
         return;
       } else {
-           axios.post("https://apipromodul.no/en/auth/send_email", {
+           axios.post("http://localhost:3000/en/auth/send_email", {
                       email: this.mailForm.mailEmail,
                       phone: this.mailForm.mailPhone,
                     }).then(response=>{
