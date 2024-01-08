@@ -16,6 +16,7 @@ import Multiselect from "vue-multiselect";
 import simplebar from "simplebar-vue";
 import Swal from "sweetalert2";
 import axios from "axios";
+import GridLayout from 'vue-grid-layout';
 
 import { barChart } from "./data-overview";
 import DatePicker from 'vue2-datepicker'
@@ -30,7 +31,7 @@ export default {
     title: "Projects Overview",
     meta: [{ name: "description", content: appConfig.description }]
   },
-  components: { Layout, DatePicker,Multiselect, simplebar,   FullCalendar },
+  components: { Layout, DatePicker, Multiselect, simplebar, FullCalendar, GridLayout },
   data() {
     return {
        myFormat: {
@@ -90,8 +91,11 @@ export default {
         fileList:[],
         addFileModal: false,
         addTaskModal: false,
+        addUserAccountTaskModal: false,
         editTaskModal:false,
         viewTaskModal: false,
+        userAccountTasks: [],
+        gridLayoutOptions: [],
         taskList: [],
         memberList: [],
         projectResourceList:[],
@@ -108,7 +112,6 @@ export default {
         description: null,
         start_time: null,
         deadline: null,
-        user_account_tasks_attributes: [],
         task_resources_attributes: []
       },
       editTaskForm: {
@@ -118,7 +121,6 @@ export default {
         description: null,
         start_time: null,
         deadline: null,
-        user_account_tasks_attributes: [],
         task_resources_attributes: []
       },
       showAddAlert:false,
@@ -150,11 +152,9 @@ export default {
         "rar":"mdi-folder-zip"
       },
       value1:null,
-      userValue:[],
       machineValue: null,
       toolValue:null,
       resoourceValue: null,
-      editUserValue:null,
       editMachineValue: null,
       editToolValue:null,
       editResoourceValue: null,
@@ -169,8 +169,6 @@ export default {
     };
   },
     validations: {
-      userValue: {required},
-      editUserValue: {required},
       editTaskForm: {
         title: {required},
         start_time: {required},
@@ -190,10 +188,10 @@ export default {
   methods: {
     download(item,name){
       axios({
-      url: `${process.env.BASE_URL}/en/attachments/file?uuid=`+item, //your url
-      method: 'GET',
-      responseType: 'blob', // important
-    }).then((response) => {
+  url: 'https://apipromodul.no/en/attachments/file?uuid='+item, //your url
+  method: 'GET',
+  responseType: 'blob', // important
+}).then((response) => {
       const blob = new Blob([response.data], { type: response.data.type })
         const link = document.createElement('a')
         link.href = URL.createObjectURL(blob)
@@ -223,12 +221,6 @@ export default {
     customLabelMachine (option) {
       return ` ${option.name}`
     },
-    onSelectUser (option) {
-      // eslint-disable-next-line no-unused-vars
-      let index = this.taskUsersList.findIndex(item => item.id==option.id);
-      this.taskUsersList[index].checked = true;
-            // eslint-disable-next-line no-console
-    },
     onSelectMachine (option) {
       // eslint-disable-next-line no-unused-vars
       let index = this.taskMachinesList.findIndex(item => item.id==option.id);
@@ -246,11 +238,6 @@ export default {
       let index = this.taskExternalResourceList.findIndex(item => item.id==option.id);
       this.taskExternalResourceList[index].checked = true;
             // eslint-disable-next-line no-console
-    },   
-    onRemoveUsers (option) {
-      let index = this.taskUsersList.findIndex(item => item.library==option.library);
-      this.taskUsersList[index].checked = false;
-
     },
     onRemoveMachine (option) {
       let index = this.taskMachinesList.findIndex(item => item.library==option.library);
@@ -297,41 +284,12 @@ export default {
       })
       
     },
-    getUserResourceList(){
-      ApiService.get("/resources/task_resource_list?start_date="+this.format_date(this.taskForm.start_time)+"&deadline="+this.format_date(this.taskForm.deadline)).then(
-      response => {
-           // eslint-disable-next-line no-console
-          this.taskExternalResourceList = response.data.resources.external_resources
-          this.taskMachinesList = response.data.resources.machines
-          this.taskToolsList = response.data.resources.tools
-      },
-      error => {
-        this.categories =
-          (error.response && error.response.companies) ||
-          error.message ||
-          error.toString();
-      }
-    );
-      ApiService.get("users/task_user_list?start_date="+this.format_date(this.taskForm.start_time)+"&deadline="+this.format_date(this.taskForm.deadline)).then(
-      response => {
-           // eslint-disable-next-line no-console
-          this.taskUsersList = response.data.employees
-      },
-      error => {
-        this.categories =
-          (error.response && error.response.companies) ||
-          error.message ||
-          error.toString();
-      }
-    );
-   
-    },
+    
     showTaskModal() {
       this.showAddAlert = false;
       this.addTaskModal = true
       this.taskForm.start_time = new Date()
       this.taskForm.deadline = new Date()
-      this.getUserResourceList()
     },
     dateClicked(info) {
       // eslint-disable-next-line no-console
@@ -368,13 +326,36 @@ export default {
       this.showAddAlert = false;
       this.addTaskModal = true
     },
+
+    addUserAccountTask(task) {
+                // eslint-disable-next-line no-console
+          console.log(task)
+
+      // ApiService.get(`resources/user_account_tasks_list?task_id=${task.id}`).then(
+      //   response => {
+      //     this.userAccountTasksList = response.data.user_account_tasks
+      //     // eslint-disable-next-line no-console
+      //     console.log('LETS GOOOOO')
+      //     // eslint-disable-next-line no-console
+      //     console.log(this.userAccountTasksList)
+      //   },
+      //   error => {
+      //     this.categories =
+      //       (error.response && error.response.companies) ||
+      //       error.message ||
+      //       error.toString();
+      //   }
+      // );
+
+      this.addUserAccountTaskModal = true;
+    },
+
     editTask(task){
     
    
      this.addDeleteResourceList = [];
      this.addDeleteUserList = [];
      this.editTaskForm.task_resources_attributes = [];
-     this.editTaskForm.user_account_tasks_attributes = [];
    
      ApiService.get("/resources/task_resource_list?start_date="+this.format_date(this.projects.start_date)+"&deadline="+this.format_date(this.projects.deadline)).then(
       response => {
@@ -392,7 +373,7 @@ export default {
     );
      ApiService.get("users/task_user_list?start_date="+this.format_date(this.projects.start_date)+"&deadline="+this.format_date(this.projects.deadline)).then(
       response => {
-           // eslint-disable-next-line no-console
+          // eslint-disable-next-line no-console
           this.taskUsersList = response.data.employees
       },
       error => {
@@ -403,7 +384,6 @@ export default {
       }
     );
    
-     this.editUserValue = task.users
     this.editMachineValue = task.resources.models
     this.editToolValue = task.resources.tools
     this.editResoourceValue = task.resources.resources
@@ -451,36 +431,17 @@ export default {
         }
       });
     },
-    addRow(userId) {
-      const user = this.taskUsersList.find(user => user.id === userId);
-      if (user) {
-        if (!user.additionalRows) {
-          this.$set(user, 'additionalRows', []); // Initialize additionalRows as an array
-        }
-        user.additionalRows.push({}); // Add an empty object or any data you need
-      }
-    },
-    removeRow(userId, rowIndex) {
-      const user = this.taskUsersList.find(user => user.id === userId);
-      if (user && user.additionalRows.length > rowIndex) {
-        user.additionalRows.splice(rowIndex, 1);
-      }
-    },
+    
     submitTaskForm() {
          
         this.typesubmit = true;
         this.$v.taskForm.$touch();
-        this.$v.userValue.$touch();
-        if (!this.$v.taskForm.$invalid && !this.$v.userValue.$invalid) 
+        if (!this.$v.taskForm.$invalid) 
         {
            this.taskForm.task_resources_attributes = [];
-           this.taskForm.user_account_tasks_attributes= [];
 
           this.taskForm.start_time = this.format_date(this.taskForm.start_time)
           this.taskForm.deadline = this.format_date(this.taskForm.deadline)
-          this.userValue.forEach(element => {
-            this.taskForm.user_account_tasks_attributes.push({"user_account_id":element.id})
-          });
           if(this.machineValue) {
            this.machineValue.forEach(element => {
             this.taskForm.task_resources_attributes.push({"resource_id":element.id})
@@ -495,8 +456,10 @@ export default {
             this.resoourceValue.forEach(element => {
             this.taskForm.task_resources_attributes.push({"resource_id":element.id})
           });
-}         
+        }         
           this.taskForm.project_id = this.project_id
+          // eslint-disable-next-line no-console
+          console.log(this.taskForm)
           ApiService.post("/tasks", this.taskForm).then(() => {
             ApiService.get("/tasks/tasks_list/"+this.project_id).then(
               response => {
@@ -517,39 +480,105 @@ export default {
       let calendarApi = this.$refs.calendar.getApi()
       calendarApi.removeAllEvents();
       this.refreshEvents();
+          },
+          error => {
+            this.categories =
+              (error.response && error.response.companies) ||
+              error.message ||
+              error.toString();
+          }
+        );
+                
+        this.resoourceValue = [];
+        this.machineValue = [];
+        this.toolValue =[];
+        this.addTaskModal = false;
+        this.successmsg(this.$t("common.The task added successfully"))
+      },
+      error =>{
+        this.alertText = null;
+        this.showAddAlert = true;
+        this.alertText = error.response.data.errors[0]["message"]
+        // eslint-disable-next-line no-console
+      
+      }
+      )}
+    },
+
+    submitAddEmployeesForm() {
+      this.editSubmit = true;
+      this.$v.editTaskForm.$touch();
+      this.$v.editUserValue.$touch();
+      if (!this.$v.editTaskForm.$invalid && !this.$v.editUserValue.$invalid) {
+    
+        this.editTaskForm.task_resources_attributes = this.addDeleteResourceList 
+
+        this.editTaskForm.start_time = this.format_date(this.editTaskForm.start_time)
+        this.editTaskForm.deadline = this.format_date(this.editTaskForm.deadline)
+        this.editTaskForm.project_id = this.project_id
+
+        ApiService.put("/tasks", this.editTaskForm).then(() => {
+            
+          ApiService.get("projects/"+parseInt(this.$route.params.id)).then(
+            response => {
+              this.projects = response.data.project
+              this.memberList = response.data.members
+                // eslint-disable-next-line no-console
+            },
+            error => {
+              this.categories =
+                (error.response && error.response.companies) ||
+                error.message ||
+                error.toString();
+            }
+          );
+
+          ApiService.get("/tasks/tasks_list/"+parseInt(this.$route.params.id)).then(
+            response => {
+
+              response.data.tasks.forEach(element => {
+              // eslint-disable-next-line no-console
+              this.calendarOptions.initialEvents.push({
+                  id: element.id,
+                  task_title: element.title,
+                  title: element.project_id,
+                  start: element.start_time,
+                  end: element.deadline,
+                  task_status: element.status
+                
+                })     
+              });
+          
+            this.refreshEvents()
+            this.taskList = response.data.tasks
+            
+          },
+          error => {
+            this.categories =
+              (error.response && error.response.companies) ||
+              error.message ||
+              error.toString();
+          }
+        );
+        this.successmsg(this.$t("common.The task updated successfully"))
+        this.editTaskModal = false;
+
       },
       error => {
-        this.categories =
-          (error.response && error.response.companies) ||
-          error.message ||
-          error.toString();
+        this.showAddAlert = true;
+        this.alertText = error.response.data.errors[0]["message"]
+        // eslint-disable-next-line no-console
       }
-    );
-            
-    this.resoourceValue = [];
-    this.machineValue = [];
-    this.toolValue =[];
-    this.userValue = [];
-    this.addTaskModal = false;
-    this.successmsg(this.$t("common.The task added successfully"))
+      )
+    }
     },
-          error =>{
-            this.alertText = null;
-            this.showAddAlert = true;
-            this.alertText = error.response.data.errors[0]["message"]
-            // eslint-disable-next-line no-console
-          
-          }
-          )}
-    },
+
     submitEditTaskForm() {
-            this.editSubmit = true;
+        this.editSubmit = true;
         this.$v.editTaskForm.$touch();
-        this.$v.editUserValue.$touch();
-        if (!this.$v.editTaskForm.$invalid && !this.$v.editUserValue.$invalid) 
+        if (!this.$v.editTaskForm.$invalid) 
         {
       
-        this.editTaskForm.user_account_tasks_attributes = this.addDeleteUserList
         this.editTaskForm.task_resources_attributes = this.addDeleteResourceList 
 
           this.editTaskForm.start_time = this.format_date(this.editTaskForm.start_time)
@@ -624,7 +653,6 @@ export default {
         this.taskForm.start_time = null
         this.taskForm.deadline = null
         this.taskForm.project_id = 0
-        this.taskForm.user_account_tasks_attributes = []
         this.taskForm.task_resources_attributes = []
       },
     format_date(value) {
@@ -1101,6 +1129,7 @@ export default {
                         </div>
                       </td>
                       <td class="text-end">
+                        <b-button @click="addUserAccountTask(task)" size="sm" variant="outline-warning" class="me-2"><i class="bx bx-edit font-size-12 pt-1"></i></b-button>
                         <b-button @click="editTask(task)" size="sm" variant="outline-warning" class="me-2"><i class="bx bx-edit font-size-12 pt-1"></i></b-button>
                         <b-button @click="deleteTask(task)"  size="sm" variant="outline-danger" class="me-2"><i class="bx bx-trash font-size-12 pt-1"></i></b-button>
                     
@@ -1224,7 +1253,7 @@ export default {
           <div class="form-group row">
             <label>{{$t("common.Start date")}}</label>  
             <div class="col-lg-12">
-              <date-picker :formatter="myFormat"  v-model="taskForm.start_time" @change="getUserResourceList" dateFormat='dd/mm/yyyy'  append-to-body lang="nb"
+              <date-picker :formatter="myFormat"  v-model="taskForm.start_time" dateFormat='dd/mm/yyyy'  append-to-body lang="nb"
               :class="{'is-invalid': typesubmit && $v.taskForm.start_time.$error}"
                 ></date-picker>
             </div>
@@ -1234,78 +1263,13 @@ export default {
           <div class="form-group row">
             <label>{{$t("common.Deadline")}}</label>
             <div class="col-lg-12">
-              <date-picker :formatter="myFormat"  v-model="taskForm.deadline" @change="getUserResourceList"  append-to-body lang="nb"
+              <date-picker :formatter="myFormat"  v-model="taskForm.deadline" append-to-body lang="nb"
               :class="{'is-invalid': typesubmit && $v.taskForm.deadline.$error}"
                 ></date-picker>
             </div>
           </div>
         </div>
-        <div class="col-md-6 mt-3">
-          <div class="form-group row">
-            <label>{{$t("common.Add employee")}}</label>  
-            <div class="col-lg-12">
-
-              <div v-for="user in taskUsersList" :key="user.id" class="row rounded bg-light m-2 p-2 shadow-sm">
-                <div class="col-md-10">
-                  <div>{{ user.first_name }}</div>
-                </div>
-                <div class="col-md-2">
-                  <div @click="addRow(user.id)" class="btn btn-outline-warning btn-sm">+</div>
-                </div>
-
-                <div v-for="(row, index) in user.additionalRows" :key="index" class="col-md-12 my-2">
-                  <div class="row">
-                    <div class="col-md-2">
-                      Dato fra
-                    </div>
-                    <div class="col-md-2">
-                      Dato til
-                    </div>
-                    <div class="col-md-2">
-                      Tid fra
-                    </div>
-                    <div class="col-md-2">
-                      Tid til
-                    </div>
-                    <div class="col-md-2">
-                      <div @click="removeRow(user.id, index)" class="btn btn-outline-danger btn-sm">Remove</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-                  <multiselect 
-                            :select-label="'klikk enter for å velge'"
-                                :selected-label="'valgt'"
-                                :deselect-label="'klikk enter for å fjerne'"
-                    v-model="userValue" 
-                    :options="taskUsersList"
-                    :multiple="true"
-                    :placeholder="$t('common.Select option')"
-                    track-by="first_name"
-                    :custom-label="customLabelUser"
-                    :close-on-select="false"
-                    @select=onSelectUser($event)
-                    @remove=onRemoveUsers($event)
-                      :class="{'is-invalid': typesubmit && $v.userValue.$error}"
-                    >
-                     <span slot="noOptions">{{$t("common.Not an available employee for this dates")}}</span>
-                    <span class="checkbox-label" slot="option" slot-scope="scope" @click.self="select(scope.option)">
-                      <input class="test me-1" type="checkbox"  v-model="scope.option.checked"   @focus.prevent/>
-                      <span class="font-size-14 text-black">{{ scope.option.first_name }} {{ scope.option.last_name }}</span> 
-                      <div class="mt-0"></div>
-                      <br > <span  class="ms-3">{{$t("common.Avialable dates")}}: </span> 
-                      <div class="mt-2"></div>
-                      <div class="ms-3 text-start text-success"  v-for="dates in scope.option.available_dates" :key="dates">
-                        {{ format_date_m(dates.first)}} - {{ format_date_m(dates.last)}}
-                      </div>
-                      <hr class="m-0 p-0 mt-1">
-                    </span>
-                  </multiselect>
-                
-            </div>
-          </div>
-        </div>
+        
         <div class="col-md-6 mt-3">
           <div class="form-group row">
           <label>{{$t("common.Add machine")}}</label>  
@@ -1579,9 +1543,24 @@ export default {
         </div>
       </div>
     </div>
-    </b-modal>
+  </b-modal>
+
+  <b-modal :title="$t('common.Add employees')" size="xl" v-model="addUserAccountTaskModal" hide-footer>
+    <form action="#" @submit.prevent="submitAddEmployeesForm" href="">
+      <GridLayout :layout="gridLayoutOptions" :col-num="12" :row-height="30">
+        <!-- Render your tasks in grid layout -->
+      </GridLayout>
+
+      <div class="modal-footer mt-3">
+        <b-button type="submit" variant="outline-success">
+          <i class="bx bx-save"></i> {{$t("common.Save")}}
+        </b-button>
+      </div>
+    </form>
+  </b-modal>
+
     
-    <b-modal  :title="$t('common.Edit task')" size="xl" v-model="editTaskModal" hide-footer>
+  <b-modal  :title="$t('common.Edit task')" size="xl" v-model="editTaskModal" hide-footer>
                <form action="#" @submit.prevent="submitEditTaskForm" href="">
                  <div class="row">
                     <div class="col-md-12">
@@ -1620,42 +1599,7 @@ export default {
                         </div>
                       </div>
                     </div>
-                    <div class="col-md-6 mt-3">
-                      <div class="form-group row">
-                        <label>{{$t('common.Add employee')}}</label>  
-                        <div class="col-lg-12">
-                             <multiselect 
-                                       :select-label="'klikk enter for å velge'"
-                                :selected-label="'valgt'"
-                                :deselect-label="'klikk enter for å fjerne'"
-                                v-model="editUserValue" 
-                                :options="taskUsersList"
-                                :multiple="true"
-                                :placeholder="$t('common.Select option')"
-                                track-by="first_name"
-                                :custom-label="customLabelUser"
-                                :close-on-select="false"
-                                @select=onAddUser($event)
-                                @remove=onDeleteUsers($event)
-                                :class="{'is-invalid': editSubmit && $v.editUserValue.$error}" 
-                                >
-                                 <span slot="noOptions">{{$t('common.Not an available employee for this dates')}}</span>
-                                <span class="checkbox-label" slot="option" slot-scope="scope" @click.self="select(scope.option)">
-                                  <input class="test me-1" type="checkbox"  v-model="scope.option.checked"   @focus.prevent/>
-                                  <span class="font-size-14 text-black">{{ scope.option.first_name }} {{ scope.option.last_name }}</span> 
-                                  <div class="mt-0"></div>
-                                  <br > <span  class="ms-3">{{$t('common.Avialable dates')}}: </span> 
-                                  <div class="mt-2"></div>
-                                  <div class="ms-3 text-start text-success"  v-for="dates in scope.option.available_dates" :key="dates">
-                                    {{ format_date_m(dates.first)}} - {{ format_date_m(dates.last)}}
-                                  </div>
-                                  <hr class="m-0 p-0 mt-1">
-                                </span>
-                              </multiselect>
-                           
-                        </div>
-                      </div>
-                    </div>
+                    
                     <div class="col-md-6 mt-3">
                       <div class="form-group row">
                       <label>{{$t('common.Add machine')}}</label>  

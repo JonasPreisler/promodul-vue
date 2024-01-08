@@ -1,0 +1,1 @@
+body,html{overflow-x:hidden}.title{@include font-size(4rem)}@media screen and (max-width:600px){body,html{font-size:5px}}@media screen and (max-width:1204px){body,html{font-size:10px}}@media screen and (max-width:1400px){body,html{font-size:11px}}
