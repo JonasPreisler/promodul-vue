@@ -9202,7 +9202,7 @@ vue-functional-data-merge@^3.1.0:
   resolved "https://registry.npmjs.org/vue-functional-data-merge/-/vue-functional-data-merge-3.1.0.tgz"
   integrity sha512-leT4kdJVQyeZNY1kmnS1xiUlQ9z1B/kdBFCILIjYYQDqZgLqCLa0UhjSSeRX6c3mUe6U5qYeM8LrEqkHJ1B4LA==
 
-vue-grid-layout@^2.4.0:
+vue-grid-layout@^2.3.12:
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/vue-grid-layout/-/vue-grid-layout-2.4.0.tgz#8b604e29832666b98b3a186a6ea97b3d1ed52310"
   integrity sha512-MRQVt1BdWDaPN4gKGEKOVVwiTyucqJhrGEyjiY9Muor+dzFFq4Hm0geSpYJpLvC1GLlTL8KWUwy0suKrHm+mqg==

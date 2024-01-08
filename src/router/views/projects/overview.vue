@@ -16,7 +16,6 @@ import Multiselect from "vue-multiselect";
 import simplebar from "simplebar-vue";
 import Swal from "sweetalert2";
 import axios from "axios";
-import GridLayout from 'vue-grid-layout';
 
 import { barChart } from "./data-overview";
 import DatePicker from 'vue2-datepicker'
@@ -31,7 +30,13 @@ export default {
     title: "Projects Overview",
     meta: [{ name: "description", content: appConfig.description }]
   },
-  components: { Layout, DatePicker, Multiselect, simplebar, FullCalendar, GridLayout },
+  components: {
+    Layout,
+    DatePicker,
+    Multiselect,
+    simplebar,
+    FullCalendar,
+  },
   data() {
     return {
        myFormat: {
@@ -94,8 +99,14 @@ export default {
         addUserAccountTaskModal: false,
         editTaskModal:false,
         viewTaskModal: false,
-        userAccountTasks: [],
-        gridLayoutOptions: [],
+        
+        timeSlots: this.generateTimeSlots(),
+        isSelecting: false,
+        startSelectIndex: null,
+        endSelectIndex: null,
+        hoverIndex: null,
+
+
         taskList: [],
         memberList: [],
         projectResourceList:[],
@@ -185,13 +196,24 @@ export default {
       },
       
     },
+    mounted() {
+      // Add event listeners for mousemove and mouseup
+      document.addEventListener('mousemove', this.onDragging);
+      document.addEventListener('mouseup', this.stopDragging);
+    },
+    beforeDestroy() {
+      // Cleanup event listeners
+      document.removeEventListener('mousemove', this.onDragging);
+      document.removeEventListener('mouseup', this.stopDragging);
+    },
+
   methods: {
     download(item,name){
       axios({
-  url: 'https://apipromodul.no/en/attachments/file?uuid='+item, //your url
-  method: 'GET',
-  responseType: 'blob', // important
-}).then((response) => {
+      url: 'https://apipromodul.no/en/attachments/file?uuid='+item, //your url
+      method: 'GET',
+      responseType: 'blob', // important
+    }).then((response) => {
       const blob = new Blob([response.data], { type: response.data.type })
         const link = document.createElement('a')
         link.href = URL.createObjectURL(blob)
@@ -327,9 +349,148 @@ export default {
       this.addTaskModal = true
     },
 
+    // USER ACCOUNT TASKS
+    
+    generateTimeSlots() {
+      // const slots = [];
+      // for (let time = 480; time <= 1080; time += 15) {
+      //   slots.push({
+      //     time: this.formatTime(time),
+      //     isAvailable: true, 
+      //   });
+      // }
+      // return slots;
+
+      const slots = [];
+      for (let time = 480; time <= 1080; time += 15) {
+        // Calculate the index based on the number of slots created so far
+        const index = (time - 480) / 15;
+        // Specifically set indices 3 and 5 as unavailable
+        const isAvailable = index !== 3 && index !== 5;
+
+        slots.push({
+          time: this.formatTime(time),
+          isAvailable: isAvailable, // Manually set for indices 3 and 5
+        });
+      }
+      return slots;
+    },
+    expandSelection(event) {
+      // if (this.isSelecting) {
+      //   const index = Number(event.target.dataset.index);
+      //   if (index !== undefined && this.timeSlots[index].isAvailable) {
+      //     this.endSelectIndex = index;
+      //   }
+      // }
+
+      if (!this.isSelecting) return;
+
+      const hoverIndex = Number(event.target.dataset.index);
+
+      // Find the direction of the drag
+      const isDraggingForward = hoverIndex > this.startSelectIndex;
+
+      // Check if timeslot range is selectable
+      let startIndex = Math.min(this.startSelectIndex, hoverIndex);
+      let endIndex = Math.max(this.startSelectIndex, hoverIndex);
+
+      for (let i = startIndex; i <= endIndex; i++) {
+        // If any timeslot in the range is not available, limit selection
+        if (!this.timeSlots[i].isAvailable) {
+          // If dragging forward, limit the end index to the timeslot just before the unavailable slot
+          if (isDraggingForward) {
+            this.endSelectIndex = i - 1;
+          } else {
+            // If dragging backward, limit the start index to the timeslot just after the unavailable slot
+            this.startSelectIndex = i + 1;
+          }
+          return; // Exit as we've hit an unavailable slot
+        }
+      }
+
+      // If all slots are available, update the selection as usual
+      this.endSelectIndex = hoverIndex;
+    },
+    formatTime(minutes) {
+      const hours = Math.floor(minutes / 60);
+      const mins = minutes % 60;
+      return `${hours < 10 ? '0' + hours : hours}:${mins === 0 ? '00' : mins}`;
+    },
+    startSelecting(event) {
+      const index = Number(event.target.dataset.index);
+      if (index !== undefined) {
+        this.isSelecting = true;
+        this.startSelectIndex = index;
+        this.endSelectIndex = index;
+      }
+    },
+    stopSelecting() {
+      this.isSelecting = false;
+
+    if (this.startSelectIndex > this.endSelectIndex) {
+        [this.startSelectIndex, this.endSelectIndex] = [this.endSelectIndex, this.startSelectIndex];
+      }
+    },
+    selectSlot(index) {
+      if (this.startSelectIndex === index && this.endSelectIndex === index) {
+        // Deselect the timeslot
+        this.startSelectIndex = null;
+        this.endSelectIndex = null;
+      }
+      else if (this.startSelectIndex === null || this.endSelectIndex === null) {
+        // Start a new selection
+        this.startSelectIndex = index;
+        this.endSelectIndex = index;
+      } else {
+        // Modify the existing selection
+        if (index < this.startSelectIndex) this.startSelectIndex = index;
+        if (index > this.endSelectIndex) this.endSelectIndex = index;
+      }
+    },
+    setHoverIndex(index) {
+      if (!this.isSelecting || index === undefined || !this.timeSlots[index].isAvailable) {
+        return; // Do not proceed if the hovered timeslot is unavailable
+      }
+
+      const isDraggingForward = index > this.startSelectIndex;
+      const checkingIndex = isDraggingForward ? this.startSelectIndex : index;
+      const directionModifier = isDraggingForward ? 1 : -1;
+
+      for (let i = checkingIndex; ; i += directionModifier) {
+        if (i < 0 || i >= this.timeSlots.length || i === index + directionModifier) {
+          break;
+        }
+        if (!this.timeSlots[i].isAvailable) {
+          this.hoverIndex = null;
+          return;
+        }
+      }
+
+      this.hoverIndex = index;
+    },
+    isSelected(index) {
+      return this.timeSlots[index].isAvailable &&
+            index >= Math.min(this.startSelectIndex, this.endSelectIndex) &&
+            index <= Math.max(this.startSelectIndex, this.endSelectIndex);
+    },
+   isInRange(index) {
+      if (!this.isSelecting || this.hoverIndex === null) return false;
+
+      const isDraggingForward = this.hoverIndex > this.startSelectIndex;
+      if (isDraggingForward) {
+        return index > this.startSelectIndex && index <= this.hoverIndex;
+      } else {
+        return index < this.startSelectIndex && index >= this.hoverIndex;
+      }
+    },
+
+
+    // END OF USER ACCOUNT TASKS
+
     addUserAccountTask(task) {
                 // eslint-disable-next-line no-console
           console.log(task)
+          
 
       // ApiService.get(`resources/user_account_tasks_list?task_id=${task.id}`).then(
       //   response => {
@@ -771,6 +932,7 @@ export default {
     ApiService.setHeader();
     ApiService.get("projects/"+parseInt(this.$route.params.id)).then(
       response => {
+    // eslint-disable-next-line no-console
         this.projects = response.data.project
         this.memberList = response.data.members
         this.projectResourceList = response.data.resources
@@ -1545,11 +1707,31 @@ export default {
     </div>
   </b-modal>
 
-  <b-modal :title="$t('common.Add employees')" size="xl" v-model="addUserAccountTaskModal" hide-footer>
-    <form action="#" @submit.prevent="submitAddEmployeesForm" href="">
-      <GridLayout :layout="gridLayoutOptions" :col-num="12" :row-height="30">
-        <!-- Render your tasks in grid layout -->
-      </GridLayout>
+  <b-modal
+    :title="$t('common.Add employees')"
+    size="xl"
+    v-model="addUserAccountTaskModal"
+    hide-footer
+  >
+    <form action="#" @submit.prevent="submitAddEmployeesForm">
+      
+      <div
+        class="time-slots-container"
+        @mousedown="startSelecting"
+        @mousemove="expandSelection"
+        @mouseup="stopSelecting"
+        @mouseleave="stopSelecting"
+      >
+        <div
+          v-for="(slot, index) in timeSlots"
+          :key="index"
+          :class="['time-slot', { 'selected': isSelected(index), 'selecting': isSelecting && isInRange(index) }]"
+          @mouseenter="setHoverIndex(index)"
+          :data-index="index"
+        >
+          {{ slot }}
+        </div>
+      </div>
 
       <div class="modal-footer mt-3">
         <b-button type="submit" variant="outline-success">
@@ -1558,7 +1740,6 @@ export default {
       </div>
     </form>
   </b-modal>
-
     
   <b-modal  :title="$t('common.Edit task')" size="xl" v-model="editTaskModal" hide-footer>
                <form action="#" @submit.prevent="submitEditTaskForm" href="">
@@ -1752,4 +1933,23 @@ export default {
 .fc .fc-timegrid-slot-label {
   display: none;
 }
+
+
+.time-slots-container {
+  display: flex;
+  user-select: none;
+}
+
+.time-slot {
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+
+.time-slot.selected,
+.time-slot.selecting {
+  background-color: #007bff;
+  color: white;
+}
+
 </style>
